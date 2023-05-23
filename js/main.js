@@ -1,3 +1,7 @@
+//////////////////////////
+////////* PLAYER*/////////
+//////////////////////////
+
 class Player {
   constructor() {
     this.width = 10;
@@ -75,8 +79,18 @@ class Player {
   }
 }
 
+
+////////////// Out of class Elements
+
 const playerInstance = new Player();
 playerInstance.playerEventListeners();
+
+////////////////////////////////////
+
+
+//////////////////////////
+////////* OBSTACLE *//////
+//////////////////////////
 
 class Obstacle {
   constructor() {
@@ -124,7 +138,7 @@ class Obstacle {
 }
 
 
-
+////////////// Out of class Elements
 
 const obstacleArr = [];
 
@@ -138,4 +152,49 @@ setInterval(() => {
     obstacle.moveDown();
 
   })
-}, 60)
+}, 2000)
+
+
+
+
+////////////////////////////////////
+
+
+//////////////////////////
+////////* PRIZE */////////
+//////////////////////////
+
+
+class Prize {
+  constructor () {
+    this.width = 10;
+    this.height = 10;
+    this.positionY = Math.floor(Math.random() * (80 - this.height + 1));
+    this.positionX = Math.floor(Math.random() * (80 - this.width + 1));
+
+    this.prize = null;
+
+    this.createDomElement();
+
+  }
+
+  createDomElement () {
+    this.prize = document.createElement("div");
+    this.prize.id = "prize";
+    this.prize.style.width = this.width + "vw";
+    this.prize.style.height = this.height + "vh";
+    this.prize.style.left = this.positionX + "vw";
+    this.prize.style.bottom = this.positionY + "vh";
+
+    const frame = document.getElementById("frame");
+    frame.appendChild(this.prize);
+    console.log()
+    }
+    
+
+
+}
+
+const prize = new Prize();
+
+
