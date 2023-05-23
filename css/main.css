@@ -1,0 +1,28 @@
+#board {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  #frame {
+    width: 80vw;
+    height: 80vh;
+    background-color: brown;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  
+  #player {
+    background-color: aqua;
+    position: absolute;
+  }
+  
+  .obstacle {
+    background-color: yellow;
+    position: absolute;
+  }
