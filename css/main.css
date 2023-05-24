@@ -7,7 +7,7 @@
   }
   
   #frame {
-    background-image: url("../images/background-game.jpg");
+    background-image: url("../images/Forest_Background_Vector_12.jpg");
     background-size: cover;
     width: 80vw;
     height: 80vh;
@@ -23,23 +23,41 @@
   #player {
     background-color: transparent;
     position: absolute;
-    background-image: url("../images/hive\ eye.png");
+    background-image: url("../images/noun-monster-184225.png");
     background-size: cover;
   }
   
   .obstacle {
-    background-color: yellow;
+    background-image: url("../images/noun-wasp-50533.png");
+    background-size: cover;
     position: absolute;
   }
 
+  /*.obstacle.image1 {
+    background-image: url("../images/noun-bee-2527253.png");
+    background-size: cover;
+  }
+
+  .obstacle.image2 {
+    background-image: url("../images/noun-balloon-479941.png");
+    background-size: cover;
+  }
+
+ obstacle.type2 {
+    background-image: url("../images/noun-balloon-479941.png");
+    background-size: cover;
+    position: absolute;
+  }*/
+
   #prize {
-    background-color: black;
+    background-image: url("../images/noun-honey-224106.png");
+    background-size: cover;
     position: absolute;
   }
 
   #gameoverboard {
-    background-image: url("../images/gameoverimage.jpeg");
-    background-size: cover;
+    background-image: url("../images/game-over-glitch-art-video-games-wallpaper-thumb.jpg");
+   background-size: cover;
   }
 
   #score {

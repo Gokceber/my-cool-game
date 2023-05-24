@@ -5,7 +5,7 @@
 class Player {
   constructor() {
     this.width = 7;
-    this.height = 7;
+    this.height = 11;
     this.positionX = 50 - this.width / 2;
     this.positionY = 0;
 
@@ -93,7 +93,7 @@ playerInstance.playerEventListeners();
 class Obstacle {
   constructor() {
     this.width = 5;
-    this.height = 5;
+    this.height = 8;
     this.positionY = 80 - this.height;
     this.positionX = Math.floor(Math.random() * (80 - this.width + 1));
 
@@ -110,7 +110,9 @@ class Obstacle {
     this.obstacle.style.height = this.height + "vh";
     this.obstacle.style.left = this.positionX + "vw";
     this.obstacle.style.bottom = this.positionY + "vh";
-
+    //this.type = Math.random() < 0.5 ? 'image1' : 'image2';
+    //this.obstacle.classList.add('obstacle', this.getObstacleClass()); // Add obstacle class and type-specific class
+    
     const frame = document.getElementById("frame");
     frame.appendChild(this.obstacle);
   }
@@ -127,6 +129,15 @@ class Obstacle {
     obstacleArr.shift();
   } 
   } 
+
+  /*getRandomObstacle (){
+    if (Math.random() < 0.5) {
+      this.type = 'image1';
+    } else {
+      this.type = 'image2';
+    }
+  }
+  */
   
   
 }
@@ -139,17 +150,57 @@ const obstacleArr = [];
 setInterval(() => {
   const obstacleInstance = new Obstacle();
   obstacleArr.push(obstacleInstance);
-}, 10000);
+}, 1700);
 
 setInterval(() => {
   obstacleArr.forEach((obstacle) => {
     obstacle.moveDown();
     obstacle.removeObstacle();
   });
-}, 10000);
+}, 100);
 
 
 
+/* let counterLives = 3;
+
+const livesText = document.createElement("h1");
+livesText.id = "lives";
+livesText.style.fontSize = 16 + "px";
+livesText.style.fontWeight = 500; 
+
+
+const parentBoard = document.getElementById("board");
+parentBoard.appendChild(livesText);
+
+livesText.textContent  = "Lives: " + counterLives;
+
+
+
+
+
+function detectCollision(obstacleInstance, playerInstance) {
+  if (
+    obstacleInstance.positionX <
+      playerInstance.positionX + playerInstance.width && //player instance is stored on line 84
+    obstacleInstance.positionX + obstacleInstance.width >
+      playerInstance.positionX &&
+    obstacleInstance.positionY <
+      playerInstance.positionY + playerInstance.height &&
+    obstacleInstance.height + obstacleInstance.positionY >
+      playerInstance.positionY
+  ) {
+    counterLives--;
+
+    
+
+    livesText.textContent  = "Lives: " + counterLives;
+
+    if (counterLives === 0){
+    location.href = "./gameover.html";
+  }
+
+  }
+}; */
 
 function detectCollision(obstacleInstance, playerInstance) {
   if (
@@ -184,7 +235,7 @@ setInterval (() => {
 class Prize {
   constructor() {
     this.width = 5;
-    this.height = 5;
+    this.height = 8;
     this.positionY = Math.floor(Math.random() * (80 - this.height + 1));
     this.positionX = Math.floor(Math.random() * (80 - this.width + 1));
 
