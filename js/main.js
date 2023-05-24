@@ -30,34 +30,34 @@ class Player {
 
   // move Left
   moveLeft() {
-    if(this.positionX>0) {
-    this.positionX--;
-    this.player.style.left = this.positionX + "vw";
-  }
+    if (this.positionX > 0) {
+      this.positionX--;
+      this.player.style.left = this.positionX + "vw";
+    }
   }
 
   // move Right
   moveRight() {
-    if (this.positionX<80-this.width) {
-    this.positionX++;
-    this.player.style.left = this.positionX + "vw";
-  }
+    if (this.positionX < 80 - this.width) {
+      this.positionX++;
+      this.player.style.left = this.positionX + "vw";
+    }
   }
 
   //move Up
   moveUp() {
-    if (this.positionY<80-this.height) {
-    this.positionY++;
-    this.player.style.bottom = this.positionY + "vh";
-  }
+    if (this.positionY < 80 - this.height) {
+      this.positionY++;
+      this.player.style.bottom = this.positionY + "vh";
+    }
   }
 
   //move Down
   moveDown() {
-    if (this.positionY>0) {
-    this.positionY--;
-    this.player.style.bottom = this.positionY + "vh";
-  }
+    if (this.positionY > 0) {
+      this.positionY--;
+      this.player.style.bottom = this.positionY + "vh";
+    }
   }
 
   playerEventListeners() {
@@ -79,14 +79,12 @@ class Player {
   }
 }
 
-
 ////////////// Out of class Elements
 
 const playerInstance = new Player();
 playerInstance.playerEventListeners();
 
 ////////////////////////////////////
-
 
 //////////////////////////
 ////////* OBSTACLE *//////
@@ -102,9 +100,6 @@ class Obstacle {
     this.obstacle = null;
 
     this.createDomElement();
-
-   
-
   }
 
   createDomElement() {
@@ -118,55 +113,86 @@ class Obstacle {
 
     const frame = document.getElementById("frame");
     frame.appendChild(this.obstacle);
-
-    
   }
 
-
-  
-  moveDown () {
-    if(this.positionY >0) {
+  moveDown() {
+    if (this.positionY > 0) {
       this.positionY--;
       this.obstacle.style.bottom = this.positionY + "vh";
     }
-  
-
-   
-    
   }
-
 }
 
-
 ////////////// Out of class Elements
+
 
 const obstacleArr = [];
 
 setInterval(() => {
   const obstacleInstance = new Obstacle();
   obstacleArr.push(obstacleInstance);
-}, 2000)
+}, 2000);
 
 setInterval(() => {
-  obstacleArr.forEach((obstacle)=>{
+  obstacleArr.forEach((obstacle) => {
     obstacle.moveDown();
+  });
+}, 40);
 
+
+
+/*
+function removeObstacle(obstacleInstance){
+  if (obstacleInstance.positionY < 0 - obstacleInstance.height) {
+    obstacleInstance.obstacle.remove();
+    obstacleArr.shift();
+  }
+};
+
+setInterval (() => {
+  obstacleArr.forEach((obstacle) => {
+    removeObstacle(obstacle);
   })
-}, 2000)
+}, 50)
 
+*/
+
+
+
+
+
+function detectCollision(obstacleInstance, playerInstance) {
+  if (
+    obstacleInstance.positionX <
+      playerInstance.positionX + playerInstance.width && //player instance is stored on line 84
+    obstacleInstance.positionX + obstacleInstance.width >
+      playerInstance.positionX &&
+    obstacleInstance.positionY <
+      playerInstance.positionY + playerInstance.height &&
+    obstacleInstance.height + obstacleInstance.positionY >
+      playerInstance.positionY
+  ) {
+    console.log("game over!!!");
+    location.href = "./gameover.html";
+  }
+};
+
+setInterval (() => {
+  obstacleArr.forEach((obstacle) => {
+    detectCollision(obstacle, playerInstance)
+  })
+}, 100)
 
 
 
 ////////////////////////////////////
 
-
 //////////////////////////
 ////////* PRIZE */////////
 //////////////////////////
 
-
 class Prize {
-  constructor () {
+  constructor() {
     this.width = 10;
     this.height = 10;
     this.positionY = Math.floor(Math.random() * (80 - this.height + 1));
@@ -175,10 +201,9 @@ class Prize {
     this.prize = null;
 
     this.createDomElement();
-
   }
 
-  createDomElement () {
+  createDomElement() {
     this.prize = document.createElement("div");
     this.prize.id = "prize";
     this.prize.style.width = this.width + "vw";
@@ -188,13 +213,42 @@ class Prize {
 
     const frame = document.getElementById("frame");
     frame.appendChild(this.prize);
-    console.log()
-    }
-    
-
-
+    console.log();
+  }
 }
 
-const prize = new Prize();
+const prizeInstance = new Prize();
+
+
+const prizeArr = [];
+prizeArr.push(prizeInstance);
+
+///i should take this into a conditional and say, if collision 
+//happens then remove this one and create a new prize
+///if there is a collision then "prizeArr.push(prizeInstance);"
+
+function detectCollisionPrize(prizeInstance, playerInstance) {
+  if (
+    prizeInstance.positionX <
+      playerInstance.positionX + playerInstance.width && //player instance is stored on line 84
+    prizeInstance.positionX + prizeInstance.width >
+      playerInstance.positionX &&
+    prizeInstance.positionY <
+      playerInstance.positionY + playerInstance.height &&
+    prizeInstance.height + prizeInstance.positionY >
+      playerInstance.positionY
+  ) {
+    console.log("GOT THE PRIZE YAAAAAAY");
+    //location.href = "./testpage.html";  ///first test with this page if the collision happens
+    prizeInstance.prize.remove();
+  }
+};
+
+setInterval (() => {
+  prizeArr.forEach((prize) => {
+    detectCollisionPrize(prize, playerInstance);
+  })
+}, 1)
+
 
 
