@@ -4,8 +4,8 @@
 
 class Player {
   constructor() {
-    this.width = 10;
-    this.height = 10;
+    this.width = 7;
+    this.height = 7;
     this.positionX = 50 - this.width / 2;
     this.positionY = 0;
 
@@ -92,8 +92,8 @@ playerInstance.playerEventListeners();
 
 class Obstacle {
   constructor() {
-    this.width = 10;
-    this.height = 10;
+    this.width = 5;
+    this.height = 5;
     this.positionY = 80 - this.height;
     this.positionX = Math.floor(Math.random() * (80 - this.width + 1));
 
@@ -116,11 +116,19 @@ class Obstacle {
   }
 
   moveDown() {
-    if (this.positionY > 0) {
       this.positionY--;
       this.obstacle.style.bottom = this.positionY + "vh";
-    }
+    
   }
+
+   removeObstacle() {
+    if (this.positionY < 0) {
+    this.obstacle.remove();
+    obstacleArr.shift();
+  } 
+  } 
+  
+  
 }
 
 ////////////// Out of class Elements
@@ -131,32 +139,14 @@ const obstacleArr = [];
 setInterval(() => {
   const obstacleInstance = new Obstacle();
   obstacleArr.push(obstacleInstance);
-}, 2000);
+}, 10000);
 
 setInterval(() => {
   obstacleArr.forEach((obstacle) => {
     obstacle.moveDown();
+    obstacle.removeObstacle();
   });
-}, 40);
-
-
-
-/*
-function removeObstacle(obstacleInstance){
-  if (obstacleInstance.positionY < 0 - obstacleInstance.height) {
-    obstacleInstance.obstacle.remove();
-    obstacleArr.shift();
-  }
-};
-
-setInterval (() => {
-  obstacleArr.forEach((obstacle) => {
-    removeObstacle(obstacle);
-  })
-}, 50)
-
-*/
-
+}, 10000);
 
 
 
@@ -193,8 +183,8 @@ setInterval (() => {
 
 class Prize {
   constructor() {
-    this.width = 10;
-    this.height = 10;
+    this.width = 5;
+    this.height = 5;
     this.positionY = Math.floor(Math.random() * (80 - this.height + 1));
     this.positionX = Math.floor(Math.random() * (80 - this.width + 1));
 
@@ -215,7 +205,19 @@ class Prize {
     frame.appendChild(this.prize);
     console.log();
   }
+
+  remove() {
+    // Remove the prize DOM element from the DOM
+    this.prize.remove();
+  }
 }
+
+
+////////////// Out of class Elements
+
+
+////////////// SCORE //////////////////////////
+
 
 const prizeInstance = new Prize();
 
@@ -223,9 +225,25 @@ const prizeInstance = new Prize();
 const prizeArr = [];
 prizeArr.push(prizeInstance);
 
-///i should take this into a conditional and say, if collision 
-//happens then remove this one and create a new prize
-///if there is a collision then "prizeArr.push(prizeInstance);"
+
+let counter = 0;
+
+const scoreText = document.createElement("h1");
+scoreText.id = "score";
+scoreText.style.fontSize = 24 + "px";
+scoreText.style.fontWeight = 500; 
+
+
+const parentBoard = document.getElementById("board");
+parentBoard.appendChild(scoreText);
+
+scoreText.textContent  = "Score: " + counter;
+
+
+
+////////////// COLLISION DETECTION FOR PRIZE AND SCORE UPDATE //////////////////////////
+
+
 
 function detectCollisionPrize(prizeInstance, playerInstance) {
   if (
@@ -238,9 +256,15 @@ function detectCollisionPrize(prizeInstance, playerInstance) {
     prizeInstance.height + prizeInstance.positionY >
       playerInstance.positionY
   ) {
-    console.log("GOT THE PRIZE YAAAAAAY");
-    //location.href = "./testpage.html";  ///first test with this page if the collision happens
-    prizeInstance.prize.remove();
+    counter++; 
+
+    prizeInstance.remove();
+    prizeArr.shift();
+   
+    const newPrizeInstance = new Prize();
+    prizeArr.unshift(newPrizeInstance);
+    //return counter
+    scoreText.textContent  = "Score: " + counter;
   }
 };
 
