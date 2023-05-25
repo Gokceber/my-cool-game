@@ -106,8 +106,8 @@ class Obstacle {
 
   getObstacleClass() {
     const imagePaths = [
-      "../images/wasp.png",
-      "../images/bird.png",
+      "images/wasp.png",
+      "images/bird.png",
     ];
     const randomIndex = Math.floor(Math.random() * imagePaths.length);
     return imagePaths[randomIndex];
@@ -259,8 +259,8 @@ class Prize {
 
   getPrizeClass() {
     const imagePathsPrize = [
-      "../images/eggs.png",
-      "../images/honey.png",
+      "images/eggs.png",
+      "images/honey.png",
      
     ];
     const randomIndexPrize = Math.floor(Math.random() * imagePathsPrize.length);
