@@ -4,9 +4,12 @@
     position: relative;
     overflow: hidden;
     background-color: beige;
+    display: flex;
+    justify-content: center;
   }
   
   #frame {
+    border-radius: 10px;
     background-image: url("../images/Forest_Background_Vector_12.jpg");
     background-size: cover;
     width: 80vw;
@@ -18,40 +21,34 @@
     left: 0;
     right: 0;
     margin: auto;
+    border: 2px solid #7A9375;
   }
   
   #player {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
     background-color: transparent;
     position: absolute;
-    background-image: url("../images/noun-monster-184225.png");
-    background-size: cover;
+    background-image: url("../images/monster.png");
   }
   
+  
   .obstacle {
-    background-image: url("../images/noun-wasp-50533.png");
-    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
     position: absolute;
   }
 
-  /*.obstacle.image1 {
-    background-image: url("../images/noun-bee-2527253.png");
-    background-size: cover;
-  }
-
-  .obstacle.image2 {
-    background-image: url("../images/noun-balloon-479941.png");
-    background-size: cover;
-  }
-
- obstacle.type2 {
-    background-image: url("../images/noun-balloon-479941.png");
-    background-size: cover;
-    position: absolute;
-  }*/
+  
 
   #prize {
-    background-image: url("../images/noun-honey-224106.png");
-    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-image: url("../images/honey.png");
+   
     position: absolute;
   }
 
@@ -60,9 +57,37 @@
    background-size: cover;
   }
 
-  #score {
-   
+  #bodystart {
+    background-color:#7A9375 ;
+   /* position: relative;*/
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+
+
   }
+
+  #startpage {
+    background-color: beige;
+    width: 1000px;
+    height: 700px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 10px;
+   /* position: absolute;
+    top: 100%;
+    left: 11%;*/
+  }
+
+ 
+
+  /* #scorebox {
+    background-color: brown;
+   height: 150 px;
+   width: 150px;
+  }
+  */
 
   #playagainbtn {
 

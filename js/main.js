@@ -4,8 +4,8 @@
 
 class Player {
   constructor() {
-    this.width = 7;
-    this.height = 11;
+    this.width = 8;
+    this.height = 12;
     this.positionX = 50 - this.width / 2;
     this.positionY = 0;
 
@@ -92,7 +92,7 @@ playerInstance.playerEventListeners();
 
 class Obstacle {
   constructor() {
-    this.width = 5;
+    this.width = 8;
     this.height = 8;
     this.positionY = 80 - this.height;
     this.positionX = Math.floor(Math.random() * (80 - this.width + 1));
@@ -100,6 +100,17 @@ class Obstacle {
     this.obstacle = null;
 
     this.createDomElement();
+
+    //this.updateSize();
+  }
+
+  getObstacleClass() {
+    const imagePaths = [
+      "../images/wasp.png",
+      "../images/bird.png",
+    ];
+    const randomIndex = Math.floor(Math.random() * imagePaths.length);
+    return imagePaths[randomIndex];
   }
 
   createDomElement() {
@@ -110,9 +121,9 @@ class Obstacle {
     this.obstacle.style.height = this.height + "vh";
     this.obstacle.style.left = this.positionX + "vw";
     this.obstacle.style.bottom = this.positionY + "vh";
-    //this.type = Math.random() < 0.5 ? 'image1' : 'image2';
-    //this.obstacle.classList.add('obstacle', this.getObstacleClass()); // Add obstacle class and type-specific class
-    
+    this.obstacle.style.backgroundImage = `url(${this.getObstacleClass()})`; // Set the background image
+
+   
     const frame = document.getElementById("frame");
     frame.appendChild(this.obstacle);
   }
@@ -128,19 +139,19 @@ class Obstacle {
     this.obstacle.remove();
     obstacleArr.shift();
   } 
+
+  
+}
   } 
 
-  /*getRandomObstacle (){
-    if (Math.random() < 0.5) {
-      this.type = 'image1';
-    } else {
-      this.type = 'image2';
-    }
+ /*updateSize() {
+    // Set the width and height of the obstacle element using JavaScript
+    this.obstacle.style.width = this.width + "px";
+    this.obstacle.style.height = this.height + "px";
   }
   */
   
-  
-}
+
 
 ////////////// Out of class Elements
 
@@ -150,14 +161,14 @@ const obstacleArr = [];
 setInterval(() => {
   const obstacleInstance = new Obstacle();
   obstacleArr.push(obstacleInstance);
-}, 1700);
+}, 10000);
 
 setInterval(() => {
   obstacleArr.forEach((obstacle) => {
     obstacle.moveDown();
     obstacle.removeObstacle();
   });
-}, 100);
+},500);
 
 
 
@@ -213,8 +224,10 @@ function detectCollision(obstacleInstance, playerInstance) {
     obstacleInstance.height + obstacleInstance.positionY >
       playerInstance.positionY
   ) {
-    console.log("game over!!!");
-    location.href = "./gameover.html";
+    
+    setTimeout (()=> {
+      location.href = "./gameover.html";
+    }, 500)
   }
 };
 
@@ -234,7 +247,7 @@ setInterval (() => {
 
 class Prize {
   constructor() {
-    this.width = 5;
+    this.width = 8;
     this.height = 8;
     this.positionY = Math.floor(Math.random() * (80 - this.height + 1));
     this.positionX = Math.floor(Math.random() * (80 - this.width + 1));
@@ -244,6 +257,17 @@ class Prize {
     this.createDomElement();
   }
 
+  getPrizeClass() {
+    const imagePathsPrize = [
+      "../images/eggs.png",
+      "../images/honey.png",
+     
+    ];
+    const randomIndexPrize = Math.floor(Math.random() * imagePathsPrize.length);
+    return imagePathsPrize[randomIndexPrize];
+  }
+
+
   createDomElement() {
     this.prize = document.createElement("div");
     this.prize.id = "prize";
@@ -251,6 +275,8 @@ class Prize {
     this.prize.style.height = this.height + "vh";
     this.prize.style.left = this.positionX + "vw";
     this.prize.style.bottom = this.positionY + "vh";
+    this.prize.style.backgroundImage = `url(${this.getPrizeClass()})`; // Set the background image
+
 
     const frame = document.getElementById("frame");
     frame.appendChild(this.prize);
@@ -283,6 +309,12 @@ const scoreText = document.createElement("h1");
 scoreText.id = "score";
 scoreText.style.fontSize = 24 + "px";
 scoreText.style.fontWeight = 500; 
+scoreText.style.color = "black";
+scoreText.style.paddingTop = "20 px"; 
+scoreText.style.paddingBottom = "20 px"; 
+scoreText.style.fontFamily = "Helvetica";
+scoreText.style.position = "center";
+
 
 
 const parentBoard = document.getElementById("board");
