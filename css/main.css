@@ -53,8 +53,34 @@
   }
 
   #gameoverboard {
-    background-image: url("../images/game-over-glitch-art-video-games-wallpaper-thumb.jpg");
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #7A9375;
    background-size: cover;
+  }
+
+  #sad {
+    height: 200px;
+    width: auto;
+    padding-bottom: 70px;
+  }
+
+  #img {
+    height: 200px;
+    width: auto;
+  }
+
+  .h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 96px;
+  }
+
+  .p {
+    padding-top: 45px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
   }
 
   #bodystart {
@@ -68,6 +94,18 @@
 
   }
 
+
+  .btn {
+
+    background-color: black;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    border: none;
+    padding: 15px 45px 15px 45px;    
+    border-radius: 5px;
+  } 
+
   #startpage {
     background-color: beige;
     width: 1000px;
@@ -75,19 +113,11 @@
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
     border-radius: 10px;
-   /* position: absolute;
-    top: 100%;
-    left: 11%;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 10px solid #445E49;
   }
 
- 
-
-  /* #scorebox {
-    background-color: brown;
-   height: 150 px;
-   width: 150px;
-  }
-  */
-
- 
 

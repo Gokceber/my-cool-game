@@ -4,8 +4,8 @@
 
 class Player {
   constructor() {
-    this.width = 8;
-    this.height = 12;
+    this.width = 10;
+    this.height = 10;
     this.positionX = 50 - this.width / 2;
     this.positionY = 0;
 
@@ -161,14 +161,14 @@ const obstacleArr = [];
 setInterval(() => {
   const obstacleInstance = new Obstacle();
   obstacleArr.push(obstacleInstance);
-}, 10000);
+}, 1200);
 
 setInterval(() => {
   obstacleArr.forEach((obstacle) => {
     obstacle.moveDown();
     obstacle.removeObstacle();
   });
-},500);
+},100);
 
 
 
